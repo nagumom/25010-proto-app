@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# ---
+# product env
+# ---
+
+# product info
+export PRODUCT_CODE=
+export PRODUCT_ENV=
+export PRODUCT_PREFIX="${PRODUCT_CODE}-${PRODUCT_ENV}"
+
+# AWS account info
+export AWS_ACCOUNT_ID=
+
+
+# ---
+# resource names
+# ---
+
+## region, AZ
+export AWS_REGION="ap-northeast-1"
+export AWS_AZ_A="${AWS_REGION}a"
+export AWS_AZ_C="${AWS_REGION}c"
+#export AWS_AZ_D="${AWS_REGION}d"
+
+## network
+### VPC
+export VPC_TAG="${PRODUCT_PREFIX}-vpc"
+
+### subnets
+export SUBNET_TAG_PREFIX="${PRODUCT_PREFIX}-subnet"
+export SUBNET_PUBLIC_1A_TAG=${SUBNET_TAG_PREFIX}-public-1a
+export SUBNET_PUBLIC_1C_TAG=${SUBNET_TAG_PREFIX}-public-1c
+export SUBNET_PRIVATE_1A_TAG=${SUBNET_TAG_PREFIX}-private-1a
+export SUBNET_PRIVATE_1C_TAG=${SUBNET_TAG_PREFIX}-private-1c
+
+### internet gataway
+export IGW_TAG="${PRODUCT_PREFIX}-igw"
+
+### route tables
+export ROUTE_TABLE_PUBLIC_TAG="${PRODUCT_PREFIX}-rtb-public"
+export ROUTE_TABLE_PRIVATE_TAG="${PRODUCT_PREFIX}-rtb-private"
+
+## server
+### security groups
+export SECURITY_GROUP_FOR_ALB_NAME=${PRODUCT_PREFIX}-sg-alb
+export SECURITY_GROUP_FOR_PUBLIC_SUBNET_NAME=${PRODUCT_PREFIX}-sg-public
+export SECURITY_GROUP_FOR_PRIVATE_SUBNET_NAME=${PRODUCT_PREFIX}-sg-private
+
+### load balancers
+export ALB_FOR_DEVELOPMENT=${PRODUCT_PREFIX}-alb-dev
+export ALB_FOR_APPLICATION=${PRODUCT_PREFIX}-alb-app
+
+## container
+### product image
+export PRODUCT_APP_IMAGE_NAME=${PRODUCT_PREFIX}-image-app
+
+### image repository
+export REPOSITORY_FOR_APP_NAME=${PRODUCT_PREFIX}-imgrepo-app
+
+### cluster
+export CLUSTER_FOR_APP_NAME=${PRODUCT_PREFIX}-cluster-app
+
+### task define
+export PRODUCT_APP_TASK_DEF=${PRODUCT_PREFIX}-taskdef-app
