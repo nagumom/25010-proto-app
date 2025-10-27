@@ -23,10 +23,11 @@ aws ec2 create-security-group --vpc-id ${VPC_ID} --group-name "${SECURITY_GROUP_
 ALB_SG_ID=`aws ec2 describe-security-groups --filters "Name=vpc-id, Values=${VPC_ID}" --filters "Name=group-name, Values=${SECURITY_GROUP_FOR_ALB_NAME}" --query "SecurityGroups[].GroupId" --output text`
 PUBLIC_SG_ID=`aws ec2 describe-security-groups --filters "Name=vpc-id, Values=${VPC_ID}" --filters "Name=group-name, Values=${SECURITY_GROUP_FOR_PUBLIC_SUBNET_NAME}" --query "SecurityGroups[].GroupId" --output text`
 PRIVATE_SG_ID=`aws ec2 describe-security-groups --filters "Name=vpc-id, Values=${VPC_ID}" --filters "Name=group-name, Values=${SECURITY_GROUP_FOR_PRIVATE_SUBNET_NAME}" --query "SecurityGroups[].GroupId" --output text`
-aws ec2 authorize-security-group-ingress --group-id ${ALB_SG_ID}    --protocol tcp --port 80   --cidr 0.0.0.0/0
+#aws ec2 authorize-security-group-ingress --group-id ${ALB_SG_ID}    --protocol tcp --port 80   --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id ${ALB_SG_ID}    --protocol tcp --port 443  --cidr 0.0.0.0/0
-aws ec2 authorize-security-group-ingress --group-id ${PUBLIC_SG_ID} --protocol tcp --port 80   --source-group ${ALB_SG_ID}
+#aws ec2 authorize-security-group-ingress --group-id ${PUBLIC_SG_ID} --protocol tcp --port 80   --source-group ${ALB_SG_ID}
 aws ec2 authorize-security-group-ingress --group-id ${PUBLIC_SG_ID} --protocol tcp --port 3000 --source-group ${ALB_SG_ID}
+aws ec2 authorize-security-group-ingress --group-id ${PUBLIC_SG_ID} --protocol tcp --port   22 --cidr 0.0.0.0/0
 
 # create alb
 # ToDo: consider sticky sessions
