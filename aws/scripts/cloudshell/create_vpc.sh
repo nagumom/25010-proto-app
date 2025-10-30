@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ../product_env.sh
+if [ -z ${PRODUCT_CODE} ] || [ -z ${PRODUCT_ENV} ]; then
+    echo "PRODUCT_CODE, PRODUCT_ENV is not set."
+    exit;
+fi
 
 # create vpc
 aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications "ResourceType=vpc, Tags=[{Key=Name, Value=${VPC_TAG}}]" --no-cli-pager

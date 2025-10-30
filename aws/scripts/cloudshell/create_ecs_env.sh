@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ../define_resource_names.sh
+if [ -z ${PRODUCT_CODE} ] || [ -z ${PRODUCT_ENV} ]; then
+    echo "PRODUCT_CODE, PRODUCT_ENV is not set."
+    exit;
+fi
 
 # create repository
 $ aws ecr create-repository --repository-name ${REPOSITORY_FOR_APP_NAME}

@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ../product_env.sh
+if [ -z ${PRODUCT_CODE} ] || [ -z ${PRODUCT_ENV} ]; then
+    echo "PRODUCT_CODE, PRODUCT_ENV is not set."
+    exit;
+fi
 
 # get ids
 VPC_ID=`aws ec2 describe-vpcs --filters "Name=tag:Name, Values=${VPC_TAG}" --query "Vpcs[].[VpcId]" --output text`
